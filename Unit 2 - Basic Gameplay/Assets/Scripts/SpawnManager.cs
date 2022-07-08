@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] GameObject[] animalPrefabs;
     // Top spawn pos
-    private float spawnRangeX = 15;
+    private float spawnRangeX = 12;
     private float spawnPosZ = 20;
 
     // Left and right spawn pos
