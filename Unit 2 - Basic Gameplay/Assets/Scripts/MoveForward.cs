@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveForward : MonoBehaviour
 {
-    private float speed = 20.0f;
+    [SerializeField] float speed = 20.0f;
     // Start is called before the first frame update
     void Start()
     {
