@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private float xRightRange = 15;
     private bool gameOver = false;
     private Animator playerAnim;
+    [SerializeField] ParticleSystem explosionParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Game Over!");
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
+            explosionParticle.Play();
         }
     }
 
