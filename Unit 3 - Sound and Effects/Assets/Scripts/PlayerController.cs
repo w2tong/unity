@@ -35,14 +35,17 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(xRightRange, transform.position.y, transform.position.z);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (!gameOver)
         {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isOnGround = false;
-            playerAnim.SetTrigger("Jump_trig");
+            if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+            {
+                playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                isOnGround = false;
+                playerAnim.SetTrigger("Jump_trig");
+            }
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            transform.Translate(Vector3.forward * horizontalInput * speed * Time.deltaTime);
         }
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        transform.Translate(Vector3.forward * horizontalInput * speed * Time.deltaTime);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -55,6 +58,8 @@ public class PlayerController : MonoBehaviour
         {
             gameOver = true;
             Debug.Log("Game Over!");
+            playerAnim.SetBool("Death_b", true);
+            playerAnim.SetInteger("DeathType_int", 1);
         }
     }
 
