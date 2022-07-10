@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool gameOver = false;
     private Animator playerAnim;
     [SerializeField] ParticleSystem explosionParticle;
+    [SerializeField] ParticleSystem dirtParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
                 playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 isOnGround = false;
                 playerAnim.SetTrigger("Jump_trig");
+                dirtParticle.Stop();
             }
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             transform.Translate(Vector3.forward * horizontalInput * speed * Time.deltaTime);
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+            dirtParticle.Play();
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
@@ -62,6 +65,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
             explosionParticle.Play();
+            dirtParticle.Stop();
         }
     }
 
