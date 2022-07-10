@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private bool isGameActive;
     [SerializeField] Button restartButton;
     [SerializeField] GameObject titleScreen;
+    private bool paused = false;
+    [SerializeField] GameObject pausedPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +29,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lives <= 0)
+        if (isGameActive)
         {
-            GameOver();
+            if (lives <= 0)
+            {
+                GameOver();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                PauseGame();
+            }
         }
     }
 
@@ -81,5 +90,25 @@ public class GameManager : MonoBehaviour
     {
         lives += num;
         livesText.text = "Lives: " + lives;
+    }
+
+    private void PauseGame()
+    {
+        paused = !paused;
+        if (paused)
+        {
+            Time.timeScale = 0;
+            pausedPanel.gameObject.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            pausedPanel.gameObject.SetActive(false);
+        }
+    }
+
+    public bool GetIsGamePaused()
+    {
+        return paused;
     }
 }

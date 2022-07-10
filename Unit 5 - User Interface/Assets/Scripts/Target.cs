@@ -34,7 +34,7 @@ public class Target : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (gameManager.GetIsGameActive())
+        if (gameManager.GetIsGameActive() && !gameManager.GetIsGamePaused())
         {
             gameManager.UpdateScore(pointValue);
             Destroy(gameObject);
