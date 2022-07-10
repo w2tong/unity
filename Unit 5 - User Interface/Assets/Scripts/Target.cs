@@ -32,15 +32,17 @@ public class Target : MonoBehaviour
 
     }
 
-    void OnMouseDown()
+    void OnMouseOver()
     {
-        if (gameManager.GetIsGameActive() && !gameManager.GetIsGamePaused())
+        if (gameManager.GetIsMouseDown() && gameManager.GetIsGameActive() && !gameManager.GetIsGamePaused())
         {
             gameManager.UpdateScore(pointValue);
             Destroy(gameObject);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
         }
     }
+
+
 
     void OnTriggerEnter(Collider other)
     {

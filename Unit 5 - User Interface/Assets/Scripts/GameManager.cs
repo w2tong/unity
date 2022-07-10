@@ -19,11 +19,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject titleScreen;
     private bool paused = false;
     [SerializeField] GameObject pausedPanel;
+    private bool isMouseDown = false;
+    [SerializeField] TrailRenderer trail;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        trail.enabled = false;
     }
 
     // Update is called once per frame
@@ -39,6 +41,22 @@ public class GameManager : MonoBehaviour
             {
                 PauseGame();
             }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            isMouseDown = true;
+            trail.Clear();
+            trail.enabled = true;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            isMouseDown = false;
+            trail.enabled = false;
+        }
+
+        if (isMouseDown)
+        {
+            trail.gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
         }
     }
 
@@ -110,5 +128,10 @@ public class GameManager : MonoBehaviour
     public bool GetIsGamePaused()
     {
         return paused;
+    }
+
+    public bool GetIsMouseDown()
+    {
+        return isMouseDown;
     }
 }
