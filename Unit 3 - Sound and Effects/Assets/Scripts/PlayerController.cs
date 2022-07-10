@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private float speed = 10;
     private float xLeftRange = 0;
     private float xRightRange = 15;
+    private bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,19 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        isOnGround = true;
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isOnGround = true;
+        }
+        else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            gameOver = true;
+            Debug.Log("Game Over!");
+        }
+    }
+
+    public bool getGameOver()
+    {
+        return gameOver;
     }
 }
