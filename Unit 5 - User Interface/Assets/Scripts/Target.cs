@@ -26,4 +26,14 @@ public class Target : MonoBehaviour
     {
 
     }
+
+    void OnMouseDown()
+    {
+        Destroy(gameObject);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+    }
 }
