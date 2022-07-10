@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerControllerScript.getGameOver() == true)
+        if (playerControllerScript.getGameOver())
         {
             CancelInvoke("SpawnObstacle");
         }
