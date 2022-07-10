@@ -19,14 +19,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip jumpSound;
     [SerializeField] AudioClip crashSound;
     private AudioSource playerAudio;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
-        Physics.gravity *= gravityModifier;
+        Physics.gravity = new Vector3(0, -9.8f, 0) * gravityModifier;
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -73,6 +75,7 @@ public class PlayerController : MonoBehaviour
             explosionParticle.Play();
             dirtParticle.Stop();
             playerAudio.PlayOneShot(crashSound, 2.0f);
+            gameManager.GameOver();
         }
     }
 
