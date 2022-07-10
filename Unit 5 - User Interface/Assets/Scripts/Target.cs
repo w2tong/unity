@@ -14,6 +14,7 @@ public class Target : MonoBehaviour
     private GameManager gameManager;
     [SerializeField] int pointValue;
     [SerializeField] ParticleSystem explosionParticle;
+    private int lifeValue = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +47,7 @@ public class Target : MonoBehaviour
         Destroy(gameObject);
         if (gameObject.CompareTag("Good"))
         {
-            gameManager.GameOver();
+            gameManager.UpdateLives(lifeValue);
         }
     }
 }

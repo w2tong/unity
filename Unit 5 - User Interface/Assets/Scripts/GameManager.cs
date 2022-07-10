@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private float spawnRate = 1.0f;
     [SerializeField] TextMeshProUGUI scoreText;
     private int score;
+    [SerializeField] TextMeshProUGUI livesText;
+    private int lives = 3;
     [SerializeField] TextMeshProUGUI gameOverText;
     private bool isGameActive;
     [SerializeField] Button restartButton;
@@ -25,7 +27,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (lives <= 0)
+        {
+            GameOver();
+        }
     }
 
     IEnumerator SpawnTarget()
@@ -66,7 +71,15 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnTarget());
         scoreText.gameObject.SetActive(true);
         UpdateScore(0);
+        livesText.gameObject.SetActive(true);
+        livesText.text = "Lives: " + lives;
         titleScreen.gameObject.SetActive(false);
         spawnRate /= difficulty;
+    }
+
+    public void UpdateLives(int num)
+    {
+        lives += num;
+        livesText.text = "Lives: " + lives;
     }
 }
