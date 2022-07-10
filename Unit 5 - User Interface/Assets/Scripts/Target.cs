@@ -5,12 +5,12 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     private Rigidbody targetRb;
-    private float minSpeed = 14;
-    private float maxSpeed = 18;
+    private float minSpeed = 12;
+    private float maxSpeed = 16;
     private float minTorque = -10;
     private float maxTorque = 10;
     private float xRange = 4;
-    private float ySpawnPos = -6;
+    private float ySpawnPos = -2;
     private GameManager gameManager;
     [SerializeField] int pointValue;
     [SerializeField] ParticleSystem explosionParticle;
@@ -33,13 +33,20 @@ public class Target : MonoBehaviour
 
     void OnMouseDown()
     {
-        gameManager.UpdateScore(pointValue);
-        Destroy(gameObject);
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        if (gameManager.GetIsGameActive())
+        {
+            gameManager.UpdateScore(pointValue);
+            Destroy(gameObject);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
+        if (gameObject.CompareTag("Good"))
+        {
+            gameManager.GameOver();
+        }
     }
 }
