@@ -13,6 +13,7 @@ public class Target : MonoBehaviour
     private float ySpawnPos = -6;
     private GameManager gameManager;
     [SerializeField] int pointValue;
+    [SerializeField] ParticleSystem explosionParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,7 @@ public class Target : MonoBehaviour
     {
         gameManager.UpdateScore(pointValue);
         Destroy(gameObject);
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
     }
 
     void OnTriggerEnter(Collider other)
