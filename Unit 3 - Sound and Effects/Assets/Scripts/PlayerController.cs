@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
-    private float jumpForce = 20;
+    private float jumpForce = 15;
     private float gravityModifier = 4;
-    private bool isOnGround = true;
+    private int currJumps = 0;
+    private int maxJumps = 2;
     private float speed = 10;
     private float xLeftRange = 0;
     private float xRightRange = 15;
@@ -43,10 +44,10 @@ public class PlayerController : MonoBehaviour
 
         if (!gameOver)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+            if (Input.GetKeyDown(KeyCode.Space) && currJumps < maxJumps)
             {
                 playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                isOnGround = false;
+                currJumps++;
                 playerAnim.SetTrigger("Jump_trig");
                 dirtParticle.Stop();
                 playerAudio.PlayOneShot(jumpSound, 2.0f);
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isOnGround = true;
+            currJumps = 0;
             dirtParticle.Play();
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
