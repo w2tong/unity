@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 5184323259540461487}
   - component: {fileID: 5868521381939845262}
   - component: {fileID: 5868521381939845261}
+  - component: {fileID: -5014125970872301723}
   m_Layer: 0
   m_Name: OncomingVehicle
   m_TagString: Untagged
@@ -471,6 +472,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9864ec5025863934cb2fd2de22d83f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5014125970872301723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5868521382616906403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa3084cb39ce9d84e9dace077eedbafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5868521382616915367

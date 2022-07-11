@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     private float turnSpeed = 50f;
     private float horizontalInput;
     private float forwardInput;
+    [SerializeField] GameObject thirdPersonCamera;
+    [SerializeField] GameObject firstPersonCamera;
+    private bool isThirdPerson = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +26,27 @@ public class PlayerController : MonoBehaviour
         // Rotates vehicle  based on horizontal input
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Rotate(Vector3.up, horizontalInput * Time.deltaTime * turnSpeed);
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("test");
+            ToggleCamera();
+        }
+    }
+
+    void ToggleCamera()
+    {
+        if (isThirdPerson)
+        {
+            thirdPersonCamera.SetActive(false);
+            firstPersonCamera.SetActive(true);
+
+        }
+        else
+        {
+            thirdPersonCamera.SetActive(true);
+            firstPersonCamera.SetActive(false);
+        }
+        isThirdPerson = !isThirdPerson;
     }
 }

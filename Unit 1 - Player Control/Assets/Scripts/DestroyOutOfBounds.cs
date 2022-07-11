@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+public class DestroyOutOfBounds : MonoBehaviour
 {
-    public GameObject player;
+    private float yBound = -5;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,8 +12,11 @@ public class FollowPlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
-        transform.position = player.transform.position;
+        if (transform.position.y < yBound)
+        {
+            Destroy(gameObject);
+        }
     }
 }
